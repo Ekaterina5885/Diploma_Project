@@ -1,0 +1,57 @@
+{
+    "name": "editNewsControlPanel",
+    "start": 1651168326121,
+    "stop": 1651168353749,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "c5ff807c-09ec-47e7-b462-4d67e779212d",
+    "historyId": "290dac85bd7ce9fbd0efb7a1a0d0f042",
+    "testCaseId": null,
+    "rerunOf": null,
+    "fullName": "ru.netology.diploma.AllClaimsTest.editNewsControlPanel",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.netology.diploma"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "editNewsControlPanel"
+        },
+        {
+            "name": "suite",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(2538)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ],
+    "links": [
+    ]
+}

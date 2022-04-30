@@ -1,0 +1,57 @@
+{
+    "name": "openAllClaims",
+    "start": 1651168140869,
+    "stop": 1651168163376,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "69a41552-bc40-4a40-8feb-d436fa51096d",
+    "historyId": "d7f43705935e71e5e8495153a3260eeb",
+    "testCaseId": null,
+    "rerunOf": null,
+    "fullName": "ru.netology.diploma.AllClaimsTest.openAllClaims",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.netology.diploma"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "openAllClaims"
+        },
+        {
+            "name": "suite",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(2538)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ],
+    "links": [
+    ]
+}

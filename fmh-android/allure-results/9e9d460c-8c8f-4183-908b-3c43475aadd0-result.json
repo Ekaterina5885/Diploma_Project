@@ -1,0 +1,57 @@
+{
+    "name": "statusChangeNews",
+    "start": 1651168633828,
+    "stop": 1651168661017,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "9e9d460c-8c8f-4183-908b-3c43475aadd0",
+    "historyId": "2410f0cdc39ae511e64ddd113223e609",
+    "testCaseId": null,
+    "rerunOf": null,
+    "fullName": "ru.netology.diploma.AllClaimsTest.statusChangeNews",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.netology.diploma"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "statusChangeNews"
+        },
+        {
+            "name": "suite",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(2538)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ],
+    "links": [
+    ]
+}

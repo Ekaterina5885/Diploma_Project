@@ -1,0 +1,57 @@
+{
+    "name": "dateFieldNextYear",
+    "start": 1651168782753,
+    "stop": 1651168809233,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "237a6e4b-fc83-4131-8356-d6e522cfbea4",
+    "historyId": "47c16b90ec497b2fcc52c4d9a7f17ae8",
+    "testCaseId": null,
+    "rerunOf": null,
+    "fullName": "ru.netology.diploma.AllClaimsTest.dateFieldNextYear",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.netology.diploma"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "dateFieldNextYear"
+        },
+        {
+            "name": "suite",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(2538)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ],
+    "links": [
+    ]
+}

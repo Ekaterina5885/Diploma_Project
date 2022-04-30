@@ -1,0 +1,57 @@
+{
+    "name": "fieldTitleEmptyCreationNewsInControlPanel",
+    "start": 1651168720334,
+    "stop": 1651168751507,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "36ecd7cc-d030-41dc-95a2-dfa326ad60fd",
+    "historyId": "51665eb632d399f1d8d015d483dbb0d5",
+    "testCaseId": null,
+    "rerunOf": null,
+    "fullName": "ru.netology.diploma.AllClaimsTest.fieldTitleEmptyCreationNewsInControlPanel",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.netology.diploma"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "fieldTitleEmptyCreationNewsInControlPanel"
+        },
+        {
+            "name": "suite",
+            "value": "ru.netology.diploma.AllClaimsTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(2538)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ],
+    "links": [
+    ]
+}

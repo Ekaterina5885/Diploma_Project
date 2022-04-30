@@ -1,0 +1,30 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "localhost",
+    "children" : [ {
+      "name" : "Instr: androidx.test.runner.AndroidJUnitRunner(1326)",
+      "children" : [ {
+        "name" : "openAllNews",
+        "uid" : "4eb0220bb02bad7b",
+        "parentUid" : "a587aa7cdc0177f0a71cdfaa0f2fb224",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651148124596,
+          "stop" : 1651148147721,
+          "duration" : 23125
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "a587aa7cdc0177f0a71cdfaa0f2fb224"
+    } ],
+    "uid" : "be30f600e0434356d35178c8efd2dc81"
+  } ]
+}

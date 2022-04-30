@@ -1,0 +1,57 @@
+{
+    "name": "loginFieldUnregisteredUser",
+    "start": 1651170042337,
+    "stop": 1651170050642,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "f3335ae5-4a25-434f-ae11-705d8e7ee2cd",
+    "historyId": "c680d159c56ca208681589a8cc7f265e",
+    "testCaseId": null,
+    "rerunOf": null,
+    "fullName": "ru.netology.diploma.AuthorizationTest.loginFieldUnregisteredUser",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.netology.diploma"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.netology.diploma.AuthorizationTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "loginFieldUnregisteredUser"
+        },
+        {
+            "name": "suite",
+            "value": "ru.netology.diploma.AuthorizationTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(2663)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ],
+    "links": [
+    ]
+}

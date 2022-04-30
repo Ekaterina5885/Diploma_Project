@@ -1,0 +1,57 @@
+{
+    "name": "successfulAuthorization",
+    "start": 1651170004067,
+    "stop": 1651170016971,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "7e8dc8c2-d51b-4d00-ae50-839d45e4f658",
+    "historyId": "e513494496181ef0d05403b1c628a145",
+    "testCaseId": null,
+    "rerunOf": null,
+    "fullName": "ru.netology.diploma.AuthorizationTest.successfulAuthorization",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.netology.diploma"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.netology.diploma.AuthorizationTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "successfulAuthorization"
+        },
+        {
+            "name": "suite",
+            "value": "ru.netology.diploma.AuthorizationTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(2663)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ],
+    "links": [
+    ]
+}

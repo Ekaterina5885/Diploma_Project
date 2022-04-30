@@ -1,0 +1,11 @@
+[ {
+  "uid" : "4eb0220bb02bad7b",
+  "name" : "openAllNews",
+  "time" : {
+    "start" : 1651148124596,
+    "stop" : 1651148147721,
+    "duration" : 23125
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

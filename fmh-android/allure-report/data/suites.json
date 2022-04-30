@@ -1,0 +1,26 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "ru.netology.diploma.AllClaimsTest",
+    "children" : [ {
+      "name" : "openAllNews",
+      "uid" : "4eb0220bb02bad7b",
+      "parentUid" : "3d8894ab43571b91b135c76c5acb8b56",
+      "status" : "passed",
+      "time" : {
+        "start" : 1651148124596,
+        "stop" : 1651148147721,
+        "duration" : 23125
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "newPassed" : false,
+      "newBroken" : false,
+      "retriesCount" : 0,
+      "retriesStatusChange" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "3d8894ab43571b91b135c76c5acb8b56"
+  } ]
+}
