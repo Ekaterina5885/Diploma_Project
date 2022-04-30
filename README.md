@@ -9,7 +9,7 @@
   
 **2.** Склонировать репозиторий
 
-    https://github.com/Ekaterina5885/Diploma   
+    https://github.com/Ekaterina5885/Diploma_Project   
  
 **3.**  Установить приложение "Мобильный хоспис" на мобильное устройство.
 
