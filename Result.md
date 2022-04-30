@@ -54,12 +54,14 @@ ____________________________________________________
 
 ### **Отчет по результатам тестирования:**
 
-[Отчет по результатам тестирования - Gradle](https://github.com/Ekaterina5885/Course_Work/blob/master/documents/ReportGradle.png)
+[Отчет по результатам тестирования - Gradle - AuthorizationTest](https://github.com/Ekaterina5885/Diploma_Project/blob/master/Report%20Gradle%20-%201.png)
 
-[Отчет по результатам тестирования - Allure](https://github.com/Ekaterina5885/Course_Work/blob/master/documents/ReportGradle.png)
+[Отчет по результатам тестирования - Gradle - AllClaimsTest](https://github.com/Ekaterina5885/Diploma_Project/blob/master/Report%20Gradle%20-%202.png)
+
+[Отчет по результатам тестирования - Allure](https://github.com/Ekaterina5885/Diploma_Project/blob/master/allure-results.zip)
 
 По результату тестирования, были выявлены баги, о чем заведены баг-репорты 
-с описанием выявленных дефектов и оформлены в разделе [Issues](https://github.com/Ekaterina5885/Diploma/issues)
+с описанием выявленных дефектов и оформлены в разделе [Issues](https://github.com/Ekaterina5885/Diploma_Project/issues)
 
 ### **Причины, по которым что-то не было сделано**
 
