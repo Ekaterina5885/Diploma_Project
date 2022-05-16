@@ -54,7 +54,7 @@ ____________________________________________________
 
 ### **Отчет по результатам тестирования:**
 
-[Отчет по результатам тестирования - Gradle](https://github.com/Ekaterina5885/Course_Work/blob/master/documents/ReportGradle.png)
+
 
 [Отчет по результатам тестирования - Allure](https://github.com/Ekaterina5885/Course_Work/blob/master/documents/ReportGradle.png)
 

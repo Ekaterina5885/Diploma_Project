@@ -5,7 +5,7 @@
 ### **Предварительные условия:**
 **1.** Установить и открыть Android Studio 
       
-      https://developer.android.com/studio 
+    https://developer.android.com/studio 
   
 **2.** Склонировать репозиторий
 
@@ -21,11 +21,9 @@
 
 **1.** Перейти в файл в для проверки тестирования:    
 
-        fmh-android/app/src/androidTest/java/ru.netology.diploma/AllClaimsTest
+    fmh-android/app/src/androidTest/java/ru.netology.diploma/tests/AllTests
 
-     или
-
-         fmh-android/app/src/androidTest/java/ru.netology.diploma/AuthorizationTest
+  
 
 **2.** Нажать на кнопку "Run"
 
