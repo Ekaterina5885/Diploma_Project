@@ -9,7 +9,7 @@
   
 **2.** Склонировать репозиторий
 
-    https://github.com/Ekaterina5885/Diploma   
+    https://github.com/Ekaterina5885/Diploma_Project   
  
 **3.**  Установить приложение "Мобильный хоспис" на мобильное устройство.
 
@@ -25,15 +25,15 @@
 
   
 
-**2.** Нажать на кнопку "Run"
+**2.** Нажать на кнопку **"Run"**
 
 
 ### **Документация**
 
-[План автоматизации тестирования](https://github.com/Ekaterina5885/Diploma/blob/master/Plan.md)
+[План автоматизации тестирования](https://github.com/Ekaterina5885/Diploma_Project/blob/master/Plan.md)
 
-[Чек-лист]()
+[Чек-лист](https://github.com/Ekaterina5885/Diploma_Project/blob/master/Check.xlsx)
 
-[Тест-кейсы](https://github.com/Ekaterina5885/Diploma/blob/master/Cases.xlsx)
+[Тест-кейсы](https://github.com/Ekaterina5885/Diploma_Project/blob/master/Cases.xlsx)
 
-[Отчёт о проведённом тестировании]()
+[Отчёт о проведённом тестировании](https://github.com/Ekaterina5885/Diploma_Project/blob/master/Result.md)
