@@ -8,7 +8,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import android.os.SystemClock;
 
 import androidx.test.espresso.NoMatchingViewException;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
@@ -18,16 +17,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
-import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import ru.netology.diploma.elements.Authorization;
-import ru.netology.diploma.elements.Quotes;
+import ru.netology.diploma.elements.AuthorizationScreen;
+import ru.netology.diploma.steps.AuthorizationSteps;
+import ru.netology.diploma.steps.QuotesSteps;
 
 @LargeTest
-@RunWith(AndroidJUnit4.class)
-//@RunWith(AllureAndroidJUnit4.class)
+//@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 
+@Epic("Тест-кейсы для проведения функционального тестирования вкладки Тематические цитаты")
 public class QuotesTest {
 
     @Rule
@@ -36,38 +40,48 @@ public class QuotesTest {
 
     @Before
     public void Authorization () {
-        SystemClock.sleep(5000);
         try {
-            Authorization.TextAuthorization(Authorization.getAuthorizationElementsTextAuthorization());
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            AuthorizationScreen.textAuthorization();
         } catch (NoMatchingViewException e) {
             return;
         }
-        Authorization.TextAuthorization(Authorization.getAuthorizationElementsTextAuthorization());
-        Authorization.clickLoginField(Authorization.getAuthorizationElementsLoginField());
-        Authorization.clickPasswordField(Authorization.getAuthorizationElementsPasswordField());
+        AuthorizationSteps.textAuthorization();
+        AuthorizationSteps.clickLoginField();
+        AuthorizationSteps.clickPasswordField();
         SystemClock.sleep(1000);
-        Authorization.clickButton(Authorization.getAuthorizationElementsButton());
+        AuthorizationScreen.clickButton(AuthorizationScreen.getAuthorizationElementsButton());
     }
 
     @After
     public void Exit () {
         SystemClock.sleep(2000);
-        Authorization.clickButtonExit(Authorization.getAuthorizationElementsButtonExit());
+        AuthorizationScreen .clickButtonExit(AuthorizationScreen.getAuthorizationElementsButtonExit());
         SystemClock.sleep(2000);
-        Authorization.clickButtonLogOut(Authorization.getAuthorizationElementsButtonLogOut());
+        AuthorizationSteps.clickButtonLogOut();
     }
 
 //  Тест-кейсы для проведения функционального тестирования вкладки "Тематические цитаты" мобильного приложения "Мобильный хоспис".
 
     //  TC - 73 - Развернуть/свернуть тематическую цитату, во вкладке "Главное - жить любя", мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 73")
+    @Description("Развернуть/свернуть тематическую цитату (Позитивный)")
     public void expandThematicQuote() {
-        SystemClock.sleep(5000);
-        Quotes.clickButtonThematicQuote(Quotes.getQuotesElementsButtonThematicQuote());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        QuotesSteps.clickButtonThematicQuote();
         SystemClock.sleep(2000);
-        Quotes.clickTitleThematicQuote(Quotes.getQuotesElementsTitleThematicQuote());
-        Quotes.clickButtonExpandThematicQuote(Quotes.getQuotesElementsButtonExpandThematicQuote());
-        Quotes.clickDescriptionThematicQuote(Quotes.getQuotesElementsDescriptionThematicQuote());
+        QuotesSteps.clickTitleThematicQuote();
+        QuotesSteps.clickButtonExpandThematicQuote();
+        QuotesSteps.clickDescriptionThematicQuote();
         SystemClock.sleep(1000);
         onView(withId(R.id.our_mission_item_list_recycler_view)).check(matches(isDisplayed()));
     }

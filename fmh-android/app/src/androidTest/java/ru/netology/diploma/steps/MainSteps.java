@@ -2,28 +2,23 @@ package ru.netology.diploma.steps;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-
-import static org.hamcrest.Matchers.allOf;
+import static ru.netology.diploma.elements.MainScreen.getMainElementsButtonAllNews;
+import static ru.netology.diploma.elements.MainScreen.getMainElementsButtonClaims;
 import static ru.netology.diploma.util.Util.nestedScrollTo;
 
-import android.view.View;
-
-import org.hamcrest.Matcher;
+import io.qameta.allure.kotlin.Allure;
 
 public class MainSteps {
 
-    public static void clickButtonAllNews(Matcher<View> resourceId){
-        onView(allOf(resourceId))
+    public static void clickButtonAllNews(){
+        Allure.step("Нажать на кнопку ВСЕ НОВОСТИ");
+        onView(getMainElementsButtonAllNews())
                 .perform(click());
     }
 
-    public static void clickButtonMainMenu(Matcher<View> resourceId){
-        onView(allOf(resourceId))
-                .perform(click());
-    }
-
-    public static void clickButtonClaims(Matcher<View> resourceId){
-        onView(allOf(resourceId))
+    public static void clickButtonClaims(){
+        Allure.step("Нажать на кнопку ВСЕ ЗАЯВКИ");
+        onView(getMainElementsButtonClaims ())
                 .perform(nestedScrollTo())
                 .perform(click());
     }

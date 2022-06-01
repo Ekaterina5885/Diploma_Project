@@ -6,7 +6,6 @@ import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.isFocusable;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -27,16 +26,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
-import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import ru.netology.diploma.elements.Authorization;
-import ru.netology.diploma.elements.Claims;
+import ru.netology.diploma.elements.AuthorizationScreen;
+import ru.netology.diploma.elements.ClaimsScreen;
+import ru.netology.diploma.steps.AuthorizationSteps;
+import ru.netology.diploma.steps.ClaimsSteps;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 //@RunWith(AllureAndroidJUnit4.class)
 
+@Epic("Тест-кейсы для проведения функционального тестирования вкладки Заявки мобильного приложения Мобильный хоспис")
 public class ClaimsTest {
 
     @Rule
@@ -45,25 +49,29 @@ public class ClaimsTest {
 
     @Before
     public void Authorization () {
-        SystemClock.sleep(5000);
         try {
-            Authorization.TextAuthorization(Authorization.getAuthorizationElementsTextAuthorization());
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            AuthorizationScreen.textAuthorization();
         } catch (NoMatchingViewException e) {
             return;
         }
-        Authorization.TextAuthorization(Authorization.getAuthorizationElementsTextAuthorization());
-        Authorization.clickLoginField(Authorization.getAuthorizationElementsLoginField());
-        Authorization.clickPasswordField(Authorization.getAuthorizationElementsPasswordField());
+        AuthorizationSteps.textAuthorization();
+        AuthorizationSteps.clickLoginField();
+        AuthorizationSteps.clickPasswordField();
         SystemClock.sleep(1000);
-        Authorization.clickButton(Authorization.getAuthorizationElementsButton());
+        AuthorizationScreen.clickButton(AuthorizationScreen.getAuthorizationElementsButton());
     }
 
     @After
     public void Exit () {
         SystemClock.sleep(2000);
-        Authorization.clickButtonExit(Authorization.getAuthorizationElementsButtonExit());
+        AuthorizationScreen .clickButtonExit(AuthorizationScreen.getAuthorizationElementsButtonExit());
         SystemClock.sleep(2000);
-        Authorization.clickButtonLogOut(Authorization.getAuthorizationElementsButtonLogOut());
+        AuthorizationSteps.clickButtonLogOut();
     }
 
 //  Тест-кейсы для проведения функционального тестирования вкладки "Заявки" мобильного приложения "Мобильный хоспис".
@@ -71,290 +79,389 @@ public class ClaimsTest {
     //  TC - 14 - Фильтрация заявок по критерию "Открыта" во вкладке "Заявки" мобильного приложения "Мобильный хоспис"(Позитивный).
 
     @Test
+    @Story("TC - 14")
+    @Description("Фильтрация заявок по критерию Открыта во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void applicationFilteringInProgress() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(1000);
-        Claims.clickButtonFilter(Claims.getClaimsElementsButtonFilter());
-        Claims.clickRemoveCheckBoxOpen(Claims.getClaimsElementsRemoveCheckBoxOpen());
-        Claims.clickButtonOk(Claims.getClaimsElementsButtonOk());
+        ClaimsSteps.clickButtonFilter();
+        ClaimsSteps.clickRemoveCheckBoxOpen();
+        ClaimsSteps.clickButtonOk();
         SystemClock.sleep(1000);
-        onView(withId(R.id.claim_list_recycler_view)).check(matches(isEnabled()));
+        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 15 - Фильтрация заявок по критерию "В работе" во вкладке "Заявки" мобильного приложения "Мобильный хоспис"(Позитивный).
     @Test
+    @Story("TC - 15")
+    @Description("Фильтрация заявок по критерию В работе во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void applicationFilteringOpen() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(1000);
-        Claims.clickButtonFilter(Claims.getClaimsElementsButtonFilter());
-        Claims.clickRemoveCheckBoxInProgress(Claims.getClaimsElementsRemoveCheckBoxInProgress());
-        Claims.clickButtonOk(Claims.getClaimsElementsButtonOk());
+        ClaimsSteps.clickButtonFilter();
+        ClaimsSteps.clickRemoveCheckBoxInProgress();
+        ClaimsSteps.clickButtonOk();
         SystemClock.sleep(1000);
-        onView(withId(R.id.claim_list_recycler_view)).check(matches(isEnabled()));
+        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 16 - Фильтрация заявок по критерию "Выполнена" во вкладке "Заявки" мобильного приложения "Мобильный хоспис"(Позитивный).
     @Test
+    @Story("TC - 16")
+    @Description(" Фильтрация заявок по критерию Выполнена во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void applicationFilteringExecuted() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(1000);
-        Claims.clickButtonFilter(Claims.getClaimsElementsButtonFilter());
-        Claims.clickRemoveCheckBoxOpen(Claims.getClaimsElementsRemoveCheckBoxOpen());
-        Claims.clickRemoveCheckBoxInProgress(Claims.getClaimsElementsRemoveCheckBoxInProgress());
-        Claims.clickCheckBoxExecuted(Claims.getClaimsElementsCheckBoxExecuted());
-        Claims.clickButtonOk(Claims.getClaimsElementsButtonOk());
+        ClaimsSteps.clickButtonFilter();
+        ClaimsSteps.clickRemoveCheckBoxOpen();
+        ClaimsSteps.clickRemoveCheckBoxInProgress();
+        ClaimsSteps.clickCheckBoxExecuted();
+        ClaimsSteps.clickButtonOk();
         SystemClock.sleep(1000);
-        onView(withId(R.id.claim_list_recycler_view)).check(matches(isEnabled()));
+        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 17 - Фильтрация заявок по критерию "Отмененные" во вкладке "Заявки" мобильного приложения "Мобильный хоспис"(Позитивный).
     @Test
+    @Story("TC - 17")
+    @Description("Фильтрация заявок по критерию Отмененные во вкладке Заявки мобильного приложения Мобильный хоспис(Позитивный)")
     public void applicationFilteringCancelled() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(1000);
-        Claims.clickButtonFilter(Claims.getClaimsElementsButtonFilter());
-        Claims.clickRemoveCheckBoxOpen(Claims.getClaimsElementsRemoveCheckBoxOpen());
-        Claims.clickRemoveCheckBoxInProgress(Claims.getClaimsElementsRemoveCheckBoxInProgress());
-        Claims.clickCheckBoxCancelled(Claims.getClaimsElementsCheckBoxCancelled());
-        Claims.clickButtonOk(Claims.getClaimsElementsButtonOk());
+        ClaimsSteps.clickButtonFilter();
+        ClaimsSteps.clickRemoveCheckBoxOpen();
+        ClaimsSteps.clickRemoveCheckBoxInProgress();
+        ClaimsSteps.clickCheckBoxCancelled();
+        ClaimsSteps.clickButtonOk();
         SystemClock.sleep(1000);
-        onView(withId(R.id.claim_list_recycler_view)).check(matches(isEnabled()));
+        onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 18 - Создание заявки во вкладке "Заявки" мобильного приложения "Мобильный хоспис"(Позитивный).
     @Test
+    @Story("TC - 18")
+    @Description("Создание заявки во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void addNewClaim() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(1000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleField(Claims.getClaimsElementsTitleField());
-        Claims.clickCheckBoxExecutorField(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleField();
+        ClaimsSteps.clickCheckBoxExecutorField();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(1000);
         onView(withId(R.id.claim_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 19 - Поле "Тема" пустое, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 19")
+    @Description("Поле Тема пустое, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Негативный)")
     public void titleFieldIsEmpty() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickCheckBoxExecutorField(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickCheckBoxExecutorField();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(allOf(withId(R.id.message), isFocusable()));
-        Claims.clickButtonOkError(Claims.getClaimsElementsButtonOkError());
+        ClaimsSteps.clickButtonOkError();
         SystemClock.sleep(2000);
         onView(allOf(withId(R.id.text_input_end_icon), isFocusable()));
-        Claims.clickButtonCancelClaim(Claims.getClaimsElementsButtonCancelClaim());
-        Claims.clickButtonOkNotification(Claims.getClaimsElementsButtonOkNotification());
+        ClaimsSteps.clickButtonCancelClaim();
+        ClaimsSteps.clickButtonOkNotification();
     }
 
     //  TC - 20 - Поле "Тема" состоит из одного символа, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 20")
+    @Description("Поле Тема состоит из одного символа, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Негативный)")
     public void titleFieldOneCharacter() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleFieldOneCharacter(Claims.getClaimsElementsTitleField());
-        Claims.clickCheckBoxExecutorField(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleFieldOneCharacter();
+        ClaimsSteps.clickCheckBoxExecutorField();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(R.id.all_claims_cards_block_constraint_layout)).check(matches(isDisplayed()));
     }
 
     //  TC - 21 - Поле "Тема" состоит из максимально-допустимого количество символов, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 21")
+    @Description("Поле Тема состоит из максимально-допустимого количество символов, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Негативный)")
     public void titleFieldMaximumCharacters() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleFieldMaximumCharacters(Claims.getClaimsElementsTitleField());
-        Claims.clickCheckBoxExecutorField(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleFieldMaximumCharacters();
+        ClaimsSteps.clickCheckBoxExecutorField();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(R.id.all_claims_cards_block_constraint_layout)).check(matches(isDisplayed()));
     }
 
     //  TC - 22 - Поле "Исполнитель" пустое, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 22")
+    @Description("Поле Исполнитель пустое, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Негативный)")
     public void executorFieldIsEmpty() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleField(Claims.getClaimsElementsTitleField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleField();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
         SystemClock.sleep(1000);
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
         SystemClock.sleep(1000);
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(R.id.all_claims_cards_block_constraint_layout)).check(matches(isDisplayed()));
     }
 
     //  TC - 23 - Ввод в поле "Исполнитель" данных, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 23")
+    @Description("Ввод в поле Исполнитель данных, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Негативный)")
     public void executorFieldOtherData() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleField(Claims.getClaimsElementsTitleField());
-        Claims.clickExecutorFieldOtherData(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleField();
+        ClaimsSteps.clickExecutorFieldOtherData();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(R.id.all_claims_cards_block_constraint_layout)).check(matches(isDisplayed()));
     }
 
     //  TC - 24 - Поле "Исполнитель" состоит из букв и цифр, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 24")
+    @Description("Поле Исполнитель состоит из букв и цифр, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Негативный)")
     public void ExecutorFieldConsistsLettersAndNumbers() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleField(Claims.getClaimsElementsTitleField());
-        Claims.clickExecutorFieldConsistsLettersAndNumbers(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleField();
+        ClaimsSteps.clickExecutorFieldConsistsLettersAndNumbers();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(R.id.all_claims_cards_block_constraint_layout)).check(matches(isDisplayed()));
     }
 
     //  TC - 25 - Поле "Исполнитель" состоит из спецсимволов, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 25")
+    @Description("Поле Исполнитель состоит из спецсимволов, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Негативный)")
     public void ExecutorFieldSpecialCharacters() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleField(Claims.getClaimsElementsTitleField());
-        Claims.clickExecutorFieldSpecialCharacters(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleField();
+        ClaimsSteps.clickExecutorFieldSpecialCharacters();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(R.id.all_claims_cards_block_constraint_layout)).check(matches(isDisplayed()));
     }
 
     //  TC - 26 - Поле "Дата" состоит из даты будущего года, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 26")
+    @Description("Поле Дата состоит из даты будущего года, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void DescriptionFieldIsEmpty() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleField(Claims.getClaimsElementsTitleField());
-        Claims.clickCheckBoxExecutorField(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateFieldNextYear(Claims.getClaimsElementsDateField());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickDescriptionField(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleField();
+        ClaimsSteps.clickCheckBoxExecutorField();
+        ClaimsSteps.clickDateFieldNextYear();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickDescriptionField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(R.id.all_claims_cards_block_constraint_layout)).check(matches(isDisplayed()));
     }
 
     //  TC - 29 - Поле "Описание" пустое, при создании заявки, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 29")
+    @Description(" Поле Описание пустое, при создании заявки, во вкладке Заявки мобильного приложения Мобильный хоспис (Негативный)")
     public void DateFieldNextYear() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonAddClaim(Claims.getClaimsElementsButtonAddClaim());
-        Claims.clickTitleField(Claims.getClaimsElementsTitleField());
-        Claims.clickCheckBoxExecutorField(Claims.getClaimsElementsExecutorField());
-        Claims.clickDateField(Claims.getClaimsElementsDateField());
-        Claims.clickButtonOkDate(Claims.getClaimsElementsButtonOkDate());
-        Claims.clickTimeField(Claims.getClaimsElementsTimeField());
-        Claims.clickButtonOkTime(Claims.getClaimsElementsButtonOkTime());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonAddClaim();
+        ClaimsSteps.clickTitleField();
+        ClaimsSteps.clickCheckBoxExecutorField();
+        ClaimsSteps.clickDateField();
+        ClaimsSteps.clickButtonOkDate();
+        SystemClock.sleep(2000);
+        ClaimsSteps.clickTimeField();
+        ClaimsSteps.clickButtonOkTime();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(allOf(withId(R.id.message), isFocusable()));
-        Claims.clickButtonOkError(Claims.getClaimsElementsButtonOkError());
+        ClaimsSteps.clickButtonOkError();
         SystemClock.sleep(1000);
         onView(allOf(withId(R.id.text_input_end_icon), isFocusable()));
-        Claims.clickButtonCancelClaim(Claims.getClaimsElementsButtonCancelClaim());
-        Claims.clickButtonOkNotification(Claims.getClaimsElementsButtonOkNotification());
+        ClaimsSteps.clickButtonCancelClaim();
+        ClaimsSteps.clickButtonOkNotification();
     }
 
     //  TC - 30 - Редактирование заявки, находящаяся в статусе "Открыта", во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 30")
+    @Description("Редактирование заявки, находящаяся в статусе Открыта, во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void EditClaimStatusOpen() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonFilter(Claims.getClaimsElementsButtonFilter());
-        Claims.clickRemoveCheckBoxInProgress(Claims.getClaimsElementsRemoveCheckBoxInProgress());
-        Claims.clickButtonOk(Claims.getClaimsElementsButtonOk());
+        ClaimsSteps.clickButtonFilter();
+        ClaimsSteps.clickRemoveCheckBoxInProgress();
+        ClaimsSteps.clickButtonOk();
         SystemClock.sleep(2000);
-        Claims.clickOpenClaim(Claims.getClaimsElementsOpenClaim());
+        ClaimsSteps.clickOpenClaim();
         SystemClock.sleep(1000);
         onView(withId(android.R.id.content)).perform(swipeUp());
-        Claims.clickEditClaim(Claims.getClaimsElementsEditClaim());
+        ClaimsSteps.clickEditClaim();
         SystemClock.sleep(1000);
-        Claims.clickEditClaimStatusOpen(Claims.getClaimsElementsDescriptionField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickEditClaimStatusOpen();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(1000);
         ViewInteraction buttonBackClaim = onView(withId(R.id.close_image_button)).perform(nestedScrollTo());
         buttonBackClaim.perform(click());
@@ -364,21 +471,27 @@ public class ClaimsTest {
 
     //  TC - 31 - Добавление комментария к заявке, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 31")
+    @Description("Добавление комментария к заявке, во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void AddComment() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickOpenClaim(Claims.getClaimsElementsOpenClaim());
+        ClaimsSteps.clickOpenClaim();
         SystemClock.sleep(1000);
         onView(withId(android.R.id.content)).perform(swipeUp());
         onView(withId(android.R.id.content)).perform(swipeUp());
         onView(withId(android.R.id.content)).perform(swipeUp());
         SystemClock.sleep(2000);
-        Claims.clickButtonAddComment(Claims.getClaimsElementsButtonAddComment());
+        ClaimsSteps.clickButtonAddComment();
         SystemClock.sleep(2000);
-        Claims.clickCommentField(Claims.getClaimsElementsCommentField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickCommentField();
+        ClaimsSteps.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(android.R.id.content)).perform(swipeUp());
         onView(withId(android.R.id.content)).perform(swipeUp());
@@ -388,35 +501,47 @@ public class ClaimsTest {
 
     //  TC - 32 - Редактирование комментария к заявке, во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 32")
+    @Description("Редактирование комментария к заявке, во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void EditComment() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickOpenClaim(Claims.getClaimsElementsOpenClaim());
+        ClaimsSteps.clickOpenClaim();
         SystemClock.sleep(1000);
-        Claims.clickButtonEditComment(Claims.getClaimsElementsButtonEditComment());
-        Claims.clickCommentField(Claims.getClaimsElementsCommentField());
-        Claims.clickButtonSave(Claims.getClaimsElementsButtonSave());
+        ClaimsSteps.clickButtonEditComment();
+        ClaimsSteps.clickCommentField();
+        ClaimsScreen.clickButtonSave();
         SystemClock.sleep(2000);
         onView(withId(R.id.comments_material_card_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 33 - Смена статуса заявки, находящаяся в статусе "Открыта" на статус "В работе", во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 33")
+    @Description("Смена статуса заявки, находящаяся в статусе Открыта на статус В работе, во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void ChangeStatusOpenForInProgress() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonFilter(Claims.getClaimsElementsButtonFilter());
-        Claims.clickRemoveCheckBoxInProgress(Claims.getClaimsElementsRemoveCheckBoxInProgress());
-        Claims.clickButtonOk(Claims.getClaimsElementsButtonOk());
+        ClaimsSteps.clickButtonFilter();
+        ClaimsSteps.clickRemoveCheckBoxInProgress();
+        ClaimsSteps.clickButtonOk();
         SystemClock.sleep(2000);
-        Claims.clickOpenClaim(Claims.getClaimsElementsOpenClaim());
-        Claims.clickButtonSettings(Claims.getClaimsElementsButtonSettings());
+        ClaimsSteps.clickOpenClaim();
+        ClaimsSteps.clickButtonSettings();
         SystemClock.sleep(2000);
-        Claims.clickButtonTakeToWork(Claims.getClaimsElementsButtonTakeToWork());
+        ClaimsSteps.clickButtonTakeToWork();
         SystemClock.sleep(2000);
         onView(withId(R.id.status_label_text_view))
                 .check(matches(withText("In progress")))
@@ -425,22 +550,28 @@ public class ClaimsTest {
 
     //  TC - 34 - Смена статуса заявки, находящаяся в статусе "Открыта" на статус "В работе", во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 34")
+    @Description("Смена статуса заявки, находящаяся в статусе Открыта на статус В работе, во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void ChangeStatusOpenForCanceled() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonFilter(Claims.getClaimsElementsButtonFilter());
-        Claims.clickRemoveCheckBoxInProgress(Claims.getClaimsElementsRemoveCheckBoxInProgress());
-        Claims.clickButtonOk(Claims.getClaimsElementsButtonOk());
+        ClaimsSteps.clickButtonFilter();
+        ClaimsSteps.clickRemoveCheckBoxInProgress();
+        ClaimsSteps.clickButtonOk();
         SystemClock.sleep(2000);
         onView(withId(android.R.id.content)).perform(swipeDown());
-        Claims.clickOpenClaim(Claims.getClaimsElementsOpenClaim());
+        ClaimsSteps.clickOpenClaim();
         SystemClock.sleep(2000);
         onView(withId(android.R.id.content)).perform(swipeUp());
-        Claims.clickButtonSettings(Claims.getClaimsElementsButtonSettings());
+        ClaimsSteps.clickButtonSettings();
         SystemClock.sleep(2000);
-        Claims.clickButtonCancel(Claims.getClaimsElementsButtonCancel());
+        ClaimsSteps.clickButtonCancel();
         SystemClock.sleep(2000);
         onView(withId(android.R.id.content)).perform(swipeDown());
         onView(withId(R.id.status_label_text_view))
@@ -450,19 +581,25 @@ public class ClaimsTest {
 
     //  TC - 35 - Смена статуса заявки, с истекшим сроком  исполнения, находящаяся в статусе "Открыта" на статус "В работу", во вкладке "Заявки" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 35")
+    @Description("Смена статуса заявки, с истекшим сроком  исполнения, находящаяся в статусе Открыта на статус В работу, во вкладке Заявки мобильного приложения Мобильный хоспис (Позитивный)")
     public void ChangeStatusOpenForInProgressExpired() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        Claims.clickButtonClaims(Claims.getClaimsElementsButtonClaims());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        ClaimsSteps.clickButtonClaims();
         SystemClock.sleep(2000);
-        Claims.clickButtonFilter(Claims.getClaimsElementsButtonFilter());
-        Claims.clickRemoveCheckBoxInProgress(Claims.getClaimsElementsRemoveCheckBoxInProgress());
-        Claims.clickButtonOk(Claims.getClaimsElementsButtonOk());
+        ClaimsSteps.clickButtonFilter();
+        ClaimsSteps.clickRemoveCheckBoxInProgress();
+        ClaimsSteps.clickButtonOk();
         SystemClock.sleep(2000);
-        Claims.clickOpenClaim(Claims.getClaimsElementsOpenClaim());
-        Claims.clickButtonSettings(Claims.getClaimsElementsButtonSettings());
+        ClaimsSteps.clickOpenClaim();
+        ClaimsSteps.clickButtonSettings();
         SystemClock.sleep(2000);
-        Claims.clickButtonTakeToWork(Claims.getClaimsElementsButtonTakeToWork());
+        ClaimsSteps.clickButtonTakeToWork();
         SystemClock.sleep(2000);
         onView(withId(R.id.status_label_text_view))
                 .check(matches(withText("In progress")))

@@ -19,17 +19,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
-import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import ru.netology.diploma.elements.About;
-import ru.netology.diploma.elements.Authorization;
-import ru.netology.diploma.elements.Claims;
+import ru.netology.diploma.elements.AuthorizationScreen;
+import ru.netology.diploma.steps.AboutSteps;
+import ru.netology.diploma.steps.AuthorizationSteps;
+import ru.netology.diploma.steps.ClaimsSteps;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 //@RunWith(AllureAndroidJUnit4.class)
 
+@Epic("Тест-кейсы для проведения функционального тестирования вкладки О приложении")
 public class AboutTest {
 
     @Rule
@@ -38,37 +42,47 @@ public class AboutTest {
 
     @Before
     public void Authorization () {
-        SystemClock.sleep(5000);
         try {
-            Authorization.TextAuthorization(Authorization.getAuthorizationElementsTextAuthorization());
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            AuthorizationScreen.textAuthorization();
         } catch (NoMatchingViewException e) {
             return;
         }
-        Authorization.TextAuthorization(Authorization.getAuthorizationElementsTextAuthorization());
-        Authorization.clickLoginField(Authorization.getAuthorizationElementsLoginField());
-        Authorization.clickPasswordField(Authorization.getAuthorizationElementsPasswordField());
+        AuthorizationSteps.textAuthorization();
+        AuthorizationSteps.clickLoginField();
+        AuthorizationSteps.clickPasswordField();
         SystemClock.sleep(1000);
-        Authorization.clickButton(Authorization.getAuthorizationElementsButton());
+        AuthorizationScreen.clickButton(AuthorizationScreen.getAuthorizationElementsButton());
     }
 
     @After
     public void Exit () {
         SystemClock.sleep(2000);
-        Authorization.clickButtonExit(Authorization.getAuthorizationElementsButtonExit());
+        AuthorizationScreen .clickButtonExit(AuthorizationScreen.getAuthorizationElementsButtonExit());
         SystemClock.sleep(2000);
-        Authorization.clickButtonLogOut(Authorization.getAuthorizationElementsButtonLogOut());
+        AuthorizationSteps.clickButtonLogOut();
     }
 
 //  Тест-кейсы для проведения функционального тестирования вкладки "О приложении" мобильного приложения "Мобильный хоспис".
 
     //  TC - 74 - Просмотр ссылки "Политика конфиденциальности" во вкладке "О приложении" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 74")
+    @Description("Просмотр ссылки Политика конфиденциальности во вкладке О приложении (Позитивный)")
     public void transitionPrivacyPolicy() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        About.clickButtonAbout(About.getAboutElementsButtonAbout());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        AboutSteps.clickButtonAbout();
         SystemClock.sleep(2000);
-        About.clickButtonPrivacyPolicy(About.getAboutElementsButtonPrivacyPolicy());
+        AboutSteps.clickButtonPrivacyPolicy();
         SystemClock.sleep(1000);
         onView(withId(R.id.action_bar_root)).check(matches(isDisplayed()));
         //Выход
@@ -77,12 +91,18 @@ public class AboutTest {
 
     //  TC - 75 - Просмотр ссылки "Пользовательское соглашение" во вкладке "О приложении" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 75")
+    @Description("Просмотр ссылки Пользовательское соглашение во вкладке О приложении (Позитивный)")
     public void transitionTermsOfUse() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        About.clickButtonAbout(About.getAboutElementsButtonAbout());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        AboutSteps.clickButtonAbout();
         SystemClock.sleep(2000);
-        About.clickButtonTermsOfUse(About.getAboutElementsButtonTermsOfUse());
+        AboutSteps.clickButtonTermsOfUse();
         SystemClock.sleep(1000);
         onView(withId(R.id.action_bar_root)).check(matches(isDisplayed()));
         //Выход

@@ -7,30 +7,29 @@ import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static ru.netology.diploma.elements.AboutScreen.getAboutElementsButtonAbout;
+import static ru.netology.diploma.elements.AboutScreen.getAboutElementsButtonPrivacyPolicy;
+import static ru.netology.diploma.elements.AboutScreen.getAboutElementsButtonTermsOfUse;
 
-import android.view.View;
-
-import org.hamcrest.Matcher;
+import io.qameta.allure.kotlin.Allure;
 
 public class AboutSteps {
 
-    public static void clickButtonAbout(Matcher<View> resourceId){
-        onView(allOf(resourceId))
+    public static void clickButtonAbout(){
+        Allure.step("Нажать на кнопку О приложении");
+        onView(getAboutElementsButtonAbout())
                 .perform(click());
     }
 
-    public static void clickButtonPrivacyPolicy(Matcher<View> resourceId){
-        onView(allOf(resourceId))
+    public static void clickButtonPrivacyPolicy(){
+        Allure.step("Нажать на ссылку Политика конфиденциальности");
+        onView(getAboutElementsButtonPrivacyPolicy())
                 .check(matches(allOf(withText("https://vhospice.org/#/privacy-policy/"), isDisplayed(), isClickable())));
     }
 
-    public static void clickButtonTermsOfUse(Matcher<View> resourceId){
-        onView(allOf(resourceId))
+    public static void clickButtonTermsOfUse(){
+        Allure.step("Нажать на ссылку Пользовательское соглашение");
+        onView(getAboutElementsButtonTermsOfUse())
                 .check(matches(allOf(withText("https://vhospice.org/#/terms-of-use"), isDisplayed(), isClickable())));
-    }
-
-    public static void clickButtonBackAbout(Matcher<View> resourceId){
-        onView(allOf(resourceId))
-                .perform(click());
     }
 }

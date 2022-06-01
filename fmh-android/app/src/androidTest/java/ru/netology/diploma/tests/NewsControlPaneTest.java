@@ -9,9 +9,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import static org.hamcrest.Matchers.allOf;
-
 import static ru.netology.diploma.util.Util.withIndex;
 
 import android.os.SystemClock;
@@ -27,13 +25,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
-import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import ru.netology.diploma.elements.Authorization;
-import ru.netology.diploma.elements.Claims;
-import ru.netology.diploma.elements.News;
-import ru.netology.diploma.elements.NewsControlPanel;
+import ru.netology.diploma.elements.AuthorizationScreen;
+import ru.netology.diploma.elements.NewsControlPanelScreen;
+import ru.netology.diploma.steps.ClaimsSteps;
+import ru.netology.diploma.steps.NewsControlPaneSteps;
+import ru.netology.diploma.steps.NewsSteps;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -47,181 +47,239 @@ public class NewsControlPaneTest {
 
     @Before
     public void Authorization () {
-        SystemClock.sleep(5000);
         try {
-            Authorization.TextAuthorization(Authorization.getAuthorizationElementsTextAuthorization());
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            AuthorizationScreen.textAuthorization();
         } catch (NoMatchingViewException e) {
             return;
         }
-        Authorization.TextAuthorization(Authorization.getAuthorizationElementsTextAuthorization());
-        Authorization.clickLoginField(Authorization.getAuthorizationElementsLoginField());
-        Authorization.clickPasswordField(Authorization.getAuthorizationElementsPasswordField());
+        AuthorizationScreen.textAuthorization();
+        AuthorizationScreen.clickLoginField();
+        AuthorizationScreen.clickPasswordField();
         SystemClock.sleep(1000);
-        Authorization.clickButton(Authorization.getAuthorizationElementsButton());
+        AuthorizationScreen.clickButton(AuthorizationScreen.getAuthorizationElementsButton());
     }
 
     @After
     public void Exit () {
         SystemClock.sleep(2000);
-        Authorization.clickButtonExit(Authorization.getAuthorizationElementsButtonExit());
+        AuthorizationScreen .clickButtonExit(AuthorizationScreen.getAuthorizationElementsButtonExit());
         SystemClock.sleep(2000);
-        Authorization.clickButtonLogOut(Authorization.getAuthorizationElementsButtonLogOut());
+        AuthorizationScreen.clickButtonLogOut();
     }
 
 // Тест-кейсы для проведения функционального тестирования "Панели Управления Новостей" мобильного приложения "Мобильный хоспис".
 
     //  TC - 54 - Сортировка новостей во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 54")
+    @Description("Сортировка новостей во вкладке Панель управления мобильного приложения Мобильный хоспис (Позитивный)")
     public void sortingNewsControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickButtonSorting(NewsControlPanel.getNewsControlPanelElementsButtonSorting());
+        NewsControlPanelScreen.clickButtonControlPanel();
+        NewsControlPanelScreen.clickButtonSorting();
         SystemClock.sleep(1000);
         onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 55 - Просмотр новостей во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 55")
+    @Description("Просмотр новостей во вкладке Панель управления мобильного приложения Мобильный хоспис (Позитивный)")
     public void viewingNewsControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickClickNews(NewsControlPanel.getNewsControlPanelElementsButtonClickNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickClickNews();
         SystemClock.sleep(1000);
         onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 56 - Удаление активной новости во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 56")
+    @Description("Удаление активной новости во вкладке Панель управления мобильного приложения Мобильный хоспис (Позитивный)")
     public void deletingActiveNews() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickClickNews(NewsControlPanel.getNewsControlPanelElementsButtonClickNews());
-        NewsControlPanel.clickButtonDeleteNews(NewsControlPanel.getNewsControlPanelElementsButtonDeleteNews());
-        NewsControlPanel.clickOkDeleteNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDeleteNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickClickNews();
+        NewsControlPaneSteps.clickButtonDeleteNews();
+        NewsControlPaneSteps.clickOkDeleteNews();
         SystemClock.sleep(1000);
         onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 57 - Редактирование новости во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 57")
+    @Description("Редактирование новости во вкладке Панель управления мобильного приложения Мобильный хоспис (Позитивный)")
     public void editNewsControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickClickNews(NewsControlPanel.getNewsControlPanelElementsButtonClickNews());
-        NewsControlPanel.clickButtonEditNews(NewsControlPanel.getNewsControlPanelElementsButtonEditNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickClickNews();
+        NewsControlPaneSteps.clickButtonEditNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTitleNewsControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonTitleNewsControlPanel());
+        NewsControlPaneSteps.clickButtonTitleNewsControlPanel();
         onView(withId(android.R.id.content)).perform(swipeUp());
         SystemClock.sleep(1000);
-        NewsControlPanel.clickButtonSaveEditingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveEditingNews());
+        NewsControlPaneSteps.clickButtonSaveEditingNews();
         SystemClock.sleep(2000);
         onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 58 - Смена статуса новости, находящаяся в статусе "АКТИВНА" на статус "НЕ АКТИВНА", во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 58")
+    @Description("Смена статуса новости, находящаяся в статусе АКТИВНА на статус НЕ АКТИВНА, во вкладке Панель управления мобильного приложения Мобильный хоспис (Позитивный)")
     public void statusChangeNews() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickClickNews(NewsControlPanel.getNewsControlPanelElementsButtonClickNews());
-        NewsControlPanel.clickButtonEditNews(NewsControlPanel.getNewsControlPanelElementsButtonEditNews());
-        NewsControlPanel.clickButtonSwitcher(NewsControlPanel.getNewsControlPanelElementsButtonSwitcher());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickClickNews();
+        NewsControlPaneSteps.clickButtonEditNews();
+        NewsControlPaneSteps.clickButtonSwitcher();
         SystemClock.sleep(2000);
         onView(withId(android.R.id.content)).perform(swipeUp());
         onView(withId(R.id.switcher))
                 .check(matches(withText("Not active")))
                 .check(matches(isDisplayed()));
         onView(withId(android.R.id.content)).perform(swipeDown());
-        NewsControlPanel.clickButtonSaveEditingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveEditingNews());
+        NewsControlPaneSteps.clickButtonSaveEditingNews();
         onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 59 - Фильтрация новостей по критерию "Активна", во вкладке "Панель управления" новостей мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 59")
+    @Description("Фильтрация новостей по критерию Активна, во вкладке Панель управления новостей мобильного приложения Мобильный хоспис (Позитивный)")
     public void filterNewsByCriterionActive() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickFilterNewsControlPanel(NewsControlPanel.getNewsControlPanelElementsFilterNewsControlPanel());
-        NewsControlPanel.clickRemoveCheckBoxActive(NewsControlPanel.getNewsControlPanelElementsRemoveCheckBoxActive());
-        NewsControlPanel.clickButtonFilterNewsControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonFilterNewsControlPanel());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickFilterNewsControlPanel();
+        NewsControlPaneSteps.clickRemoveCheckBoxActive();
+        NewsControlPaneSteps.clickButtonFilterNewsControlPanel();
         SystemClock.sleep(2000);
         onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 60 - Фильтрация новостей по критерию "Не активна", во вкладке "Панель управления" новостей мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 60")
+    @Description("Фильтрация новостей по критерию Не активна, во вкладке Панель управления новостей мобильного приложения Мобильный хоспис (Позитивный)")
     public void filterNewsByCriterionNotActive() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickFilterNewsControlPanel(NewsControlPanel.getNewsControlPanelElementsFilterNewsControlPanel());
-        NewsControlPanel.clickRemoveCheckBoxNotActive(NewsControlPanel.getNewsControlPanelElementsRemoveCheckBoxNotActive());
-        NewsControlPanel.clickButtonFilterNewsControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonFilterNewsControlPanel());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickFilterNewsControlPanel();
+        NewsControlPaneSteps.clickRemoveCheckBoxNotActive();
+        NewsControlPaneSteps.clickButtonFilterNewsControlPanel();
         SystemClock.sleep(2000);
         onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     //  TC - 61 - Создание новости во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 61")
+    @Description("Создание новости во вкладке Панель управления мобильного приложения Мобильный хоспис (Позитивный)")
     public void creationNewsInControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
-        NewsControlPanel.clickButtonCategoryCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
+        NewsControlPaneSteps.clickButtonCategoryCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
-        NewsControlPanel.clickButtonOkDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDateCreatingNews());
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonDateCreatingNews();
+        NewsControlPaneSteps.clickButtonOkDateCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withIndex(withId(R.id.news_item_material_card_view), 0))).check(matches(isDisplayed()));
     }
 
     //  TC - 62 - Поле "Категория" пустое, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 62")
+    @Description("Поле Категория пустое, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Негативный)")
     public void fieldCategoryEmptyCreationNewsInControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
-        NewsControlPanel.clickButtonOkDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDateCreatingNews());
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonDateCreatingNews();
+        NewsControlPaneSteps.clickButtonOkDateCreatingNews();
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withContentDescription("Fill empty fields"), isDisplayed()));
         pressBack();
@@ -229,22 +287,28 @@ public class NewsControlPaneTest {
 
     //  TC - 63 - Поле "Заголовок" пустое, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 63")
+    @Description("Поле Заголовок пустое, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Негативный)")
     public void fieldTitleEmptyCreationNewsInControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonCategoryCreatingNew(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
-        NewsControlPanel.clickButtonOkDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDateCreatingNews());
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
+        NewsControlPaneSteps.clickButtonCategoryCreatingNew();
+        NewsControlPaneSteps.clickButtonDateCreatingNews();
+        NewsControlPaneSteps.clickButtonOkDateCreatingNews();
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withContentDescription("Fill empty fields"), isDisplayed()));
         pressBack();
@@ -252,21 +316,27 @@ public class NewsControlPaneTest {
 
     //  TC - 64 - Поле "Дата публикации" пустое, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 64")
+    @Description("Поле Дата публикации пустое, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Негативный)")
     public void fieldDateEmptyCreationNewsInControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonCategoryCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
+        NewsControlPaneSteps.clickButtonCategoryCreatingNews();
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withContentDescription("Fill empty fields"), isDisplayed()));
         pressBack();
@@ -274,21 +344,28 @@ public class NewsControlPaneTest {
 
     //  TC - 65 - Поле "Время" пустое, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 65")
+    @Description("Поле Время пустое, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Негативный)")
+
     public void fieldTimeEmptyCreationNewsInControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonCategoryCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
+        NewsControlPaneSteps.clickButtonCategoryCreatingNews();
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonDateCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonOkDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDateCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonOkDateCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withContentDescription("Fill empty fields"), isDisplayed()));
         pressBack();
@@ -296,22 +373,28 @@ public class NewsControlPaneTest {
 
     //  TC - 66 - Поле "Описание" пустое, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 66")
+    @Description("Поле Описание пустое, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Негативный)")
     public void fieldDescriptionEmptyCreationNewsInControlPanel() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonCategoryCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
-        NewsControlPanel.clickButtonOkDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDateCreatingNews());
+        NewsControlPaneSteps.clickButtonCategoryCreatingNews();
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonDateCreatingNews();
+        NewsControlPaneSteps.clickButtonOkDateCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withContentDescription("Fill empty fields"), isDisplayed()));
         pressBack();
@@ -319,23 +402,29 @@ public class NewsControlPaneTest {
 
     //  TC - 67 - Ввод в поле "Категория" собственного названия категории, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 67")
+    @Description("Ввод в поле Категория собственного названия категории, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Негативный)")
     public void customCategoryName() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonCategoryCreatingNewsEmpty(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
-        NewsControlPanel.clickButtonOkDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDateCreatingNews());
+        NewsControlPaneSteps.clickButtonCategoryCreatingNewsEmpty();
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonDateCreatingNews();
+        NewsControlPaneSteps.clickButtonOkDateCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withContentDescription("Saving failed. Try again later"), isDisplayed()));
         pressBack();
@@ -343,23 +432,29 @@ public class NewsControlPaneTest {
     }
     //  TC - 68 - Поле "Категория" состоит из цифр, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 68")
+    @Description("Поле Категория состоит из цифр, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Негативный)")
     public void fieldCategoryConsistsOfNumbers() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonCategoryCreatingNewsNumbers(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
-        NewsControlPanel.clickButtonOkDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDateCreatingNews());
+        NewsControlPaneSteps.clickButtonCategoryCreatingNewsNumbers();
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonDateCreatingNews();
+        NewsControlPaneSteps.clickButtonOkDateCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withContentDescription("Saving failed. Try again later"), isDisplayed()));
         pressBack();
@@ -367,47 +462,58 @@ public class NewsControlPaneTest {
     }
     //  TC - 69 - Поле "Категория" состоит из спецсимволов, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Негативный).
     @Test
+    @Story("TC - 69")
+    @Description("Поле Категория состоит из спецсимволов, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Негативный)")
     public void fieldCategoryConsistsOfSpecialCharacters() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonCategoryCreatingCharacters(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
-        NewsControlPanel.clickButtonOkDateCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkDateCreatingNews());
+        NewsControlPaneSteps.clickButtonCategoryCreatingCharacters();
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonDateCreatingNews();
+        NewsControlPaneSteps.clickButtonOkDateCreatingNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(allOf(withContentDescription("Saving failed. Try again later"), isDisplayed()));
         pressBack();
-
     }
 
     //  TC - 70 - Поле "Дата публикации" состоит из даты будущего года, при создании новости, во вкладке "Панель управления" мобильного приложения "Мобильный хоспис" (Позитивный).
     @Test
+    @Story("TC - 70")
+    @Description("Поле Дата публикации состоит из даты будущего года, при создании новости, во вкладке Панель управления мобильного приложения Мобильный хоспис (Позитивный)")
     public void fieldDateConsistsOfNextYearCreatingNews() {
-        SystemClock.sleep(5000);
-        Claims.clickButtonMainMenu(Claims.getClaimsElementsButtonMainMenu());
-        News.clickButtonNews(News.getNewsElementsButtonNews());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ClaimsSteps.clickButtonMainMenu();
+        NewsSteps.clickButtonNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonControlPanel(NewsControlPanel.getNewsControlPanelElementsButtonControlPanel());
-        NewsControlPanel.clickAddNews(NewsControlPanel.getNewsControlPanelElementsAddNews());
+        NewsControlPaneSteps.clickButtonControlPanel();
+        NewsControlPaneSteps.clickAddNews();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonCategoryCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonCategoryCreatingNews());
-        NewsControlPanel.clickButtonTitleCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTitleCreatingNews());
-        NewsControlPanel.clickButtonDateCreatingNextDate(NewsControlPanel.getNewsControlPanelElementsButtonDateCreatingNews());
+        NewsControlPaneSteps.clickButtonCategoryCreatingNews();
+        NewsControlPaneSteps.clickButtonTitleCreatingNews();
+        NewsControlPaneSteps.clickButtonDateCreatingNextDate();
         SystemClock.sleep(2000);
-        NewsControlPanel.clickButtonTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonTimeCreatingNews());
-        NewsControlPanel.clickButtonOkTimeCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonOkTimeCreatingNews());
-        NewsControlPanel.clickDescriptionCreatingNews(NewsControlPanel.getNewsControlPanelElementsDescriptionCreatingNews());
-        NewsControlPanel.clickButtonSaveCreatingNews(NewsControlPanel.getNewsControlPanelElementsButtonSaveCreatingNews());
+        NewsControlPaneSteps.clickButtonTimeCreatingNews();
+        NewsControlPaneSteps.clickButtonOkTimeCreatingNews();
+        NewsControlPaneSteps.clickDescriptionCreatingNews();
+        NewsControlPaneSteps.clickButtonSaveCreatingNews();
         SystemClock.sleep(2000);
         onView(withId(R.id.news_list_recycler_view)).check(matches(isDisplayed()));
     }
