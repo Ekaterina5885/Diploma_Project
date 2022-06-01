@@ -39,6 +39,7 @@ import ru.netology.diploma.steps.NewsSteps;
 @RunWith(AndroidJUnit4.class)
 //@RunWith(AllureAndroidJUnit4.class)
 
+@Epic("Тест-кейсы для проведения функционального тестирования Панели Управления Новостей мобильного приложения Мобильный хоспис")
 public class NewsControlPaneTest {
 
     @Rule
