@@ -141,10 +141,4 @@ public class Util {
     private static ViewParent findParent(ViewParent view) {
         return view.getParent();
     }
-
-
-
-
-
-
 }
